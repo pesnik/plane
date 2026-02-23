@@ -25,7 +25,7 @@ services:
       - "traefik.http.routers.plane-admin.entrypoints=web"
       - "traefik.http.routers.plane-admin.middlewares=plane-admin-stripprefix"
       - "traefik.http.services.plane-admin.loadbalancer.server.port=3000"
-      - "traefik.http.middlewares.plane-admin-stripprefix.stripprefix.prefixes=/plane/god-mode"
+      - "traefik.http.middlewares.plane-admin-stripprefix.stripprefix.prefixes=/plane"
 
   web:
     build:
@@ -47,12 +47,12 @@ services:
       - traefik_default
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.plane-admin.rule=PathPrefix(`/plane/god-mode`)"
-      - "traefik.http.routers.plane-admin.priority=80"
-      - "traefik.http.routers.plane-admin.entrypoints=web"
-      - "traefik.http.routers.plane-admin.middlewares=plane-admin-stripprefix"
-      - "traefik.http.services.plane-admin.loadbalancer.server.port=3000"
-      - "traefik.http.middlewares.plane-admin-stripprefix.stripprefix.prefixes=/plane/god-mode"
+      - "traefik.http.routers.plane-web.rule=PathPrefix(`/plane`)"
+      - "traefik.http.routers.plane-web.priority=50"
+      - "traefik.http.routers.plane-web.entrypoints=web"
+      - "traefik.http.routers.plane-web.middlewares=plane-web-stripprefix"
+      - "traefik.http.services.plane-web.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.plane-web-stripprefix.stripprefix.prefixes=/plane"
 
   space:
     build:
@@ -234,6 +234,7 @@ volumes:
   redisdata:
   uploads:
   rabbitmq_data:
+
 
 networks:
   traefik_default:
