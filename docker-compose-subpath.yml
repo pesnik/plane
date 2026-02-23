@@ -21,7 +21,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plane-admin.rule=PathPrefix(`/plane/god-mode`)"
-      - "traefik.http.routers.plane-admin.priority=80"
+      - "traefik.http.routers.plane-admin.priority=100"
       - "traefik.http.routers.plane-admin.entrypoints=web"
       - "traefik.http.routers.plane-admin.middlewares=plane-admin-stripprefix"
       - "traefik.http.services.plane-admin.loadbalancer.server.port=3000"
